@@ -18,6 +18,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +29,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-
+@Builder
 
 @Entity
 public class PokemonSpecie {
@@ -43,31 +44,46 @@ public class PokemonSpecie {
 	
 	@Column(name="primary_type")
 	@NonNull
-	private Type primaryType;
+	private TypeEnum primaryType;
 	
 	@Column(name="secondary_type")
 	@Nullable
-	private Type secondaryType;
+	private TypeEnum secondaryType;
 	
 	@ManyToMany
 	@JoinTable(name = "learning_moves", joinColumns = @JoinColumn(name = "pokedex_id"), inverseJoinColumns = @JoinColumn(name = "move_id"))
 	private Set<Move> learningMoves;
 	
-	@Column(name="base_stats")
-	private Map<StatsEnum, Integer> baseStats;
+	private Integer hp;
+	
+	private Integer atk;
+	
+	private Integer def;
+	
+	@Column(name="sp_atk")
+	private Integer spAtk;
+	
+	@Column(name="sp_def")
+	private Integer spDef;
+	
+	private Integer spd;
 	
 	@OneToMany(mappedBy = "specie")
 	private List<Pokemon> pokemons;
 
 	// Insert
-	public PokemonSpecie(String specieName, Type primaryType, Type secondaryType, Set<Move> learningMoves,
-			Map<StatsEnum, Integer> baseStats) {
+	public PokemonSpecie(String specieName, TypeEnum primaryType, TypeEnum secondaryType, Set<Move> learningMoves,
+			Integer hp, Integer atk, Integer def, Integer spAtk, Integer spDef, Integer spd) {
 		this.specieName = specieName;
 		this.primaryType = primaryType;
 		this.secondaryType = secondaryType;
 		this.learningMoves = learningMoves;
-		this.baseStats = baseStats;
+		this.hp = hp;
+		this.atk = atk;
+		this.def = def;
+		this.spAtk = spAtk;
+		this.spDef = spDef;
+		this.spd = spd;
 	}
-	
 	
 }

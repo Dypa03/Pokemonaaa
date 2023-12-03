@@ -8,10 +8,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,22 +25,26 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Builder
 
 @Entity
 public class Move {
 
 	@Id
 	@Column(name="move_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer moveId;
 	
 	@Column(name="move_name")
 	private String moveName;
 	
-	private Type type;
+	@Enumerated(EnumType.STRING)
+	private TypeEnum type;
 	
 	private Integer damage;
 	
-	private Integer precision;
+	@Column(name="move_precision")
+	private Integer movePrecision;
 	
 	@Column(name="moveType")
 	@Enumerated(EnumType.STRING)
@@ -54,11 +61,11 @@ public class Move {
 	private Set<PokemonSpecie> learningPokemons;
 
 	// Insert
-	public Move(String moveName, Type type, Integer damage, Integer precision, MoveTypeEnum moveType, Integer pp) {
+	public Move(String moveName, TypeEnum type, Integer damage, Integer movePrecision, MoveTypeEnum moveType, Integer pp) {
 		this.moveName = moveName;
 		this.type = type;
 		this.damage = damage;
-		this.precision = precision;
+		this.movePrecision = movePrecision;
 		this.moveType = moveType;
 		this.pp = pp;
 	}

@@ -24,10 +24,9 @@ import lombok.ToString;
 @Setter
 @ToString
 
-@Entity
+
 public class Type {
 	
-	@Enumerated(EnumType.STRING)
 	private TypeEnum typeName;
 	
 	private List<String> resitances;

@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Builder
 
 @Entity
 public class Pokemon {
@@ -40,7 +42,7 @@ public class Pokemon {
 	@JoinColumn(name = "pokedex_id")
 	private PokemonSpecie specie;
 	
-	private String nickname = specie.getSpecieName();
+	private String nickname = null;
 	
 	@ManyToMany
 	@JoinTable(name = "battle_moves", joinColumns = @JoinColumn(name = "pokemon_id"), inverseJoinColumns = @JoinColumn(name = "move_id"))
@@ -49,31 +51,31 @@ public class Pokemon {
 	
 	//private String ability;
 	
-	@Column(name="iv_spread")
-	private Map<StatsEnum, Integer> ivSpread;
-	
-	@Column(name="ev_spread")
-	private Map<StatsEnum, Integer> evSpread;
+//	@Column(name="iv_spread")
+//	private Map<StatsEnum, Integer> ivSpread;
+//	
+//	@Column(name="ev_spread")
+//	private Map<StatsEnum, Integer> evSpread;
 
 	// Insert
 	public Pokemon(Integer pokemonId, PokemonSpecie specie) {
 		this.pokemonId = pokemonId;
 		this.specie = specie;
 		
-		this.ivSpread = new HashMap<>();
-		ivSpread.put(StatsEnum.HP, 31);
-		ivSpread.put(StatsEnum.ATK, 31);
-		ivSpread.put(StatsEnum.DEF, 31);
-		ivSpread.put(StatsEnum.SP_ATK, 31);
-		ivSpread.put(StatsEnum.SP_DEF, 31);
-		ivSpread.put(StatsEnum.SPD, 31);
-		
-		this.evSpread = new HashMap<>();
-		evSpread.put(StatsEnum.HP, 0);
-		evSpread.put(StatsEnum.ATK, 0);
-		evSpread.put(StatsEnum.DEF, 0);
-		evSpread.put(StatsEnum.SP_ATK, 0);
-		evSpread.put(StatsEnum.SP_DEF, 0);
-		evSpread.put(StatsEnum.SPD, 0);
+//		this.ivSpread = new HashMap<>();
+//		ivSpread.put(StatsEnum.HP, 31);
+//		ivSpread.put(StatsEnum.ATK, 31);
+//		ivSpread.put(StatsEnum.DEF, 31);
+//		ivSpread.put(StatsEnum.SP_ATK, 31);
+//		ivSpread.put(StatsEnum.SP_DEF, 31);
+//		ivSpread.put(StatsEnum.SPD, 31);
+//		
+//		this.evSpread = new HashMap<>();
+//		evSpread.put(StatsEnum.HP, 0);
+//		evSpread.put(StatsEnum.ATK, 0);
+//		evSpread.put(StatsEnum.DEF, 0);
+//		evSpread.put(StatsEnum.SP_ATK, 0);
+//		evSpread.put(StatsEnum.SP_DEF, 0);
+//		evSpread.put(StatsEnum.SPD, 0);
 	}
 }

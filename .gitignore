@@ -1,0 +1,33 @@
+# File generati da Eclipse
+.classpath
+.project
+.settings/
+
+# File generati da Maven
+target/
+*.iml
+
+# Log e file temporanei
+log/
+*.log
+*.log.*
+*.log.txt
+*.log.html
+*.log.xml
+*.log.json
+*.log.gz
+*.log.zip
+*.log.tar
+*.log.txt.*
+
+# Directory di output
+out/
+
+# File di configurazione
+application.properties
+
+# Directory di dipendenze
+lib/
+
+# Directory di compilazione
+bin/
